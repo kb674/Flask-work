@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h2>Incomplete Tasks</h2>
+{% for task in all_tasks %}
+
+    {% if task.task_status == False %}
+        {{ task.task_id }}
+        {{ task.task_name }}
+        <br>
+        {{ task.description }}
+        {{ task.date_created }}
+        <br>
+        <form action="{{ url_for('update', id=task.task_id) }}">
+            <input type=submit value="Update">
+        </form>
+        <form action="{{ url_for('delete', id=task.task_id) }}">
+            <input type=submit value="Delete">
+        </form>
+        <form action="{{ url_for('complete', id=task.task_id) }}">
+            <input type=submit value="Complete">
+        </form>
+        <br>
+        <br>
+    {% endif %}
+
+{% endfor %}
+
+<h2>Complete Tasks</h2>
+{% for task in all_tasks %}
+
+    {% if task.task_status == True %}
+        {{ task.task_id }}
+        {{ task.task_name }}
+        <br>
+        {{ task.description }}
+        {{ task.date_created }}
+        <br>
+        <form action="{{ url_for('update', id=task.task_id) }}">
+            <input type=submit value="Update">
+        </form>
+        <form action="{{ url_for('delete', id=task.task_id) }}">
+            <input type=submit value="Delete">
+        </form>
+        <form action="{{ url_for('incomplete', id=task.task_id) }}">
+            <input type=submit value="Inomplete">
+        </form>
+        <br>
+        <br>
+    {% endif %}
+
+{% endfor %}
+
+{% endblock body %}
